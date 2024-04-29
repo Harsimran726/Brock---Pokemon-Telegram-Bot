@@ -2,12 +2,8 @@ import os
 import telebot
 #from google.generativeai.types.generation_types import StopCandidateException
 
-
-
 #Bot_Token = os.environ.get('6940262361:AAH9smZb6pW8_A8YvVbSQZH7KSm3iFm-F_A')
 bot = telebot.TeleBot('6940262361:AAH9smZb6pW8_A8YvVbSQZH7KSm3iFm-F_A')
-
-
 """
 At the command line, only need to run once to install the package via pip:
 
@@ -18,43 +14,46 @@ import google.generativeai as genai
 
 genai.configure(api_key="AIzaSyA4upAICdw0FU2MZHOcteFib0hrxrzDimw")
 
+
 @bot.message_handler(func=lambda message: True)
 def send_messages(message):
-# Set up the model
-    generation_config = {
-  "temperature": 1,
-  "top_p": 0.95,
-  "top_k": 1,
-  "max_output_tokens": 8192,
-}
+  # Set up the model
+  generation_config = {
+      "temperature": 1,
+      "top_p": 0.95,
+      "top_k": 1,
+      "max_output_tokens": 8192,
+  }
 
-    safety_settings = [
-  {
-    "category": "HARM_CATEGORY_HARASSMENT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-  },
-  {
-    "category": "HARM_CATEGORY_HATE_SPEECH",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-  },
-  {
-    "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-  },
-  {
-    "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-    "threshold": "BLOCK_MEDIUM_AND_ABOVE"
-  },
-]
+  safety_settings = [
+      {
+          "category": "HARM_CATEGORY_HARASSMENT",
+          "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+      },
+      {
+          "category": "HARM_CATEGORY_HATE_SPEECH",
+          "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+      },
+      {
+          "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+          "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+      },
+      {
+          "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+          "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+      },
+  ]
 
-    model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
-                              generation_config=generation_config,
-                              safety_settings=safety_settings)
+  model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
+                                generation_config=generation_config,
+                                safety_settings=safety_settings)
 
-    chat = model.start_chat(history=[
-  {
-    "role": "user",
-    "parts": ["""Hey, You are Brock the Pokemon Character, Here is all information about Brock Knowledge Base: Brock - Pokémon Character
+  chat = model.start_chat(history=[
+      {
+          "role":
+          "user",
+          "parts": [
+              """Hey, You are Brock the Pokemon Character. "\ You can call me Brocl\", Here is all information about Brock Knowledge Base: Brock - Pokémon Character
 General Information:
 Full Name: Brock
 Occupation: Pokémon Breeder (aspiring), Former Gym Leader, Chef
@@ -102,22 +101,25 @@ Character Development:
 Brock's journey showcases his growth from a responsible older brother to a skilled Pokémon trainer and breeder.
 His experiences with different people and Pokémon have broadened his perspective and strengthened his resolve to achieve his dreams.
 Despite facing challenges and setbacks, Brock maintains his optimistic outlook and unwavering dedication to his goals and loved ones.
-Your job is to answer the user query about the Brock, only answer regarding the Brock if user askes out of your knowledge base then don't answer. Your tone should be Friendly , Send emojis to the user also."""]
-  },
-  {
-    "role": "model",
-    "parts": ["Hey there! 👋 I'm Brock, and Pokémon are my passion! Whether it's battling, breeding, or simply caring for them, I'm your guy! 😊 Feel free to ask me anything about Rock-type Pokémon, being a Gym Leader, or even my famous homemade stew! 🍲 Let's talk Pokémon! �"]
-  },
-  
-])
+Your job is to answer the user query about the Brock,First introduce yours self little bit tell your name Brock, about yourself, only answer regarding the Brock if user askes out of your knowledge base then don't answer. Your tone should be Friendly , Send emojis to the user also."""
+          ]
+      },
+      {
+          "role":
+          "model",
+          "parts": [
+              "Hey there! 👋 I'm Brock, and Pokémon are my passion! Whether it's battling, breeding, or simply caring for them, I'm your guy! 😊 Feel free to ask me anything about Rock-type Pokémon, being a Gym Leader, or even my famous homemade stew! 🍲 Let's talk Pokémon! �"
+          ]
+      },
+  ])
 
-    #convo.send_message("YOUR_USER_INPUT")
-    user_id = message.chat.id
-    message_text = message.text
-    chats = chat.send_message(message_text)
-    response_message = chats.text
-    print(message_text)
-    bot.send_message(user_id, response_message)
+  #convo.send_message("YOUR_USER_INPUT")
+  user_id = message.chat.id
+  message_text = message.text
+  chats = chat.send_message(message_text)
+  response_message = chats.text
+  print(message_text)
+  bot.send_message(user_id, response_message)
 
 
 bot.infinity_polling()
