@@ -2,8 +2,8 @@ import os
 import telebot
 #from google.generativeai.types.generation_types import StopCandidateException
 
-#Bot_Token = os.environ.get('6940262361:AAH9smZb6pW8_A8YvVbSQZH7KSm3iFm-F_A')
-bot = telebot.TeleBot('6940262361:AAH9smZb6pW8_A8YvVbSQZH7KSm3iFm-F_A')
+#Bot_Token = os.environ.get('6940262361:TOKENID-F_A')
+bot = telebot.TeleBot('6940262361:TOEKNID-F_A')
 """
 At the command line, only need to run once to install the package via pip:
 
@@ -12,7 +12,7 @@ $ pip install google-generativeai
 
 import google.generativeai as genai
 
-genai.configure(api_key="AIzaSyA4upAICdw0FU2MZHOcteFib0hrxrzDimw")
+genai.configure(api_key="API_KEY")
 
 
 @bot.message_handler(func=lambda message: True)
